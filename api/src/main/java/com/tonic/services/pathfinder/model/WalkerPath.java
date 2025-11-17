@@ -155,6 +155,7 @@ public class WalkerPath
         }
 
         GameManager.setPathPoints(IStep.toWorldPoints(steps));
+        closeWorldMap();
 
         if(prayers != null)
         {
@@ -484,5 +485,15 @@ public class WalkerPath
             if(item != null)
                 InventoryAPI.interact(item, 1);
         }
+    }
+
+    public static void closeWorldMap(){
+        Static.invoke(() -> {
+            Widget closeWorldMap = WidgetAPI.get(InterfaceID.Worldmap.CLOSE);
+            if (closeWorldMap != null && !closeWorldMap.isHidden()) {
+                WidgetAPI.interact(closeWorldMap, "Close");
+                Logger.info("Closed WorldMap");
+            }
+        });
     }
 }
